@@ -2,25 +2,25 @@
 
 ## Game Design Document (GDD)
 
-### Game Title:
-**(TBD)**  
-*Team Input Needed:* Do we have ideas for a title that hints at covert operations, secrets, or shadowy contracts?
+### Game Title
+**Bargain Hunters**  
+*Premise*: In the gritty underworld of the Bargain Basement black market, players scramble for deals, eliminate competition, and influence the market as they accept shadowy contracts. In this dystopian world, each action has an impact—from raising the cost of fuel to auctioning rare items.
 
 ---
 
 ## Game Overview
 
-### Concept  
-The player accepts “jobs” that involve exploring hostile levels filled with enemies, secret paths, and loot caches. Using a combination of stealth and action, the player completes specific objectives per level, such as reaching certain areas, acquiring loot, or causing chaos.
+### Concept
+Players navigate a chaotic, dangerous black market where each job influences the economy and resources. They can take on missions, collect items, and eliminate rivals to gain an advantage, all while operating within a dynamic market system that rewards strategic choices.
 
-### Genre  
-Top-down action with stealth and exploration elements, inspired by games like *Hotline Miami*.
+### Genre
+Top-down action game with strategy and exploration elements, inspired by classic games like *Hotline Miami* but with a satirical, chaotic market economy twist.
 
-### Platform  
+### Platform
 PC and web browsers (itch.io).
 
-### Theme Interpretation  
-Each job and level is designed around the idea of “secrets,” with hidden areas, objectives, and interactive elements that allow players to choose how they approach their mission.
+### Theme Interpretation
+The game revolves around “bargains,” where every action affects item availability and pricing. Through random market events and destructive missions, players gain more influence over the market and their reputation.
 
 ---
 
@@ -28,57 +28,55 @@ Each job and level is designed around the idea of “secrets,” with hidden are
 
 ### Core Mechanics
 
-- **Job Selection:**  
-  Players choose from multiple job offers via in-game “emails,” each with different objectives and rewards.
-  
-- **Level Objectives:**  
-  Level creators can set the main goal as reaching a specific area, destroying items, eliminating enemies, or retrieving loot.  
-  *Team Input Needed:* Should we allow players to have multiple simultaneous objectives, or is one main objective per level ideal?
+- **Job Selection**  
+  Players pick from various job offers, each with unique objectives and rewards that impact the game world, market prices, and available items.
 
-- **Secret Paths & Interactions:**  
-  Levels include hidden rooms, breakable walls, or destructible items to encourage exploration.
+- **Randomized Market**  
+  Weapons and items are available at fluctuating prices. Players can impact the prices by manipulating the economy through their choices.
 
-- **Time Limit (Optional):**  
-  To add intensity, levels can have a countdown timer.  
-  *Team Input Needed:* Should the timer be a core mechanic, or used only in certain scenarios?
+- **Market Influence Missions**  
+  Missions allow players to change prices. For example, destroying fuel supplies raises gas costs, or eliminating supply chains can make certain items scarce.
 
-- **Cheat Mode (Optional Wildcard):**  
-  Players can activate invincibility or power-ups by discovering hidden cheat codes in levels.
+- **Instacart Mode (Collection Missions)**  
+  Players receive a “shopping list” of items to collect. Completing these missions unlocks rewards or special items on the market.
 
----
+- **Auction Mechanics**  
+  Some rare items are only available at auctions, requiring players to compete or even sabotage rivals to win prized possessions.
 
-## Story and Setting
+- **Punch Card Rewards**  
+  Players earn a power-up after a set number of items or kills, offering more abilities and advantages as they progress.
 
-### Story Summary  
-Players act as anonymous agents taking on shadowy contracts from mysterious employers. Each mission email provides a vague briefing, hinting at a hidden agenda or secret organization.
+- **Time-Limited Objectives**  
+  Some jobs require completing tasks within a time limit, creating urgency and the option to eliminate competition along the way.
 
-### Setting  
-Each level can vary, with locations like abandoned warehouses, corporate offices, dark alleys, or underground bunkers.  
-*Team Input Needed:* Should the setting stay consistent (e.g., a single city) or vary wildly between levels for diversity?
+### Story and Setting
+
+- **Story Summary**  
+  The protagonist, known as *The Saint*, is an ex-priest turned vigilante enforcer in a dystopian city. Guided by cryptic mission emails, they strive to "cleanse" the city of corruption, one job at a time, each action rippling through the market.
+
+- **Setting**  
+  Levels take place in various dark environments: black market hubs, abandoned warehouses, auction houses, and gritty alleys. Each location reflects a dangerous, chaotic urban landscape with hidden rooms, destructible items, and NPCs.
 
 ---
 
 ## Art and Sound
 
-### Art Style  
-Four-color pixel art inspired by retro games. Simple animations for character movement and actions, with a focus on clarity in visual feedback for attacks, item pickups, and stealth.
+### Art Style
+Four-color pixel art for a gritty, retro aesthetic. Environments and characters are minimalistic but expressive, with key details on muscle-bound NPCs, shady characters, and rough urban settings.
 
 ### Sound Design
-- **Ambient Music:** Creates tension with subtle, eerie background tracks.
-- **Sound Effects:** Emphasis on footstep sounds, gunfire, item collection, and doors opening.  
-  *Team Input Needed:* Do we have an art style preference (e.g., gritty vs. clean pixel art)? Should we add a composer or go with royalty-free tracks?
+- **Ambient Music**: Dark, rhythmic tunes fitting the intense, underground vibe.
+- **Sound Effects**: Footsteps, gunfire, item pickups, and object destruction for immersive feedback.
 
----
+### Technical Requirements
 
-## Technical Requirements
+- **Development Tools**
+  - **Game Engine**: Clickteam Fusion, chosen for fast level editing and asset integration.
+  - **Level Editor**: Built-in editor for streamlined level design, making it easy for team members to place assets and test gameplay.
+  - **Aseprite for Assets**: Assets and animations will be created in Aseprite, with sprite sheets exported for easy loading in Clickteam Fusion.
 
-### Development Tools
-- **Game Engine:** Unity or Godot (for ease of building a level editor and quick level iteration).
-- **Level Editor:** Create a built-in level editor to allow team members and players to craft new stages.
-
-### Source Control
-- **GitHub Repository:** For code and asset collaboration, with a folder structure for level files and assets.  
-  *Team Input Needed:* Which engine are we most comfortable with for building an editor?
+- **Source Control**
+  - **GitHub Repository**: Centralized for code and asset collaboration, with organized folders for sprite sheets, level assets, and audio files.
 
 ---
 
@@ -86,24 +84,27 @@ Four-color pixel art inspired by retro games. Simple animations for character mo
 
 ### Development Phases
 
-1. **Week 1:** Concept Finalization & Level Editor Setup  
-   Define final mechanics, art style, and sound direction. Begin building the level editor.
-   
-2. **Week 2:** Basic Mechanics and Prototype Development  
-   Implement core mechanics and a first draft of the editor to allow level testing.
-   
-3. **Week 3:** Level Creation & Polish  
-   Build a variety of levels, test objectives, and refine gameplay balance.
-   
-4. **Week 4:** Final Polish & Submission  
-   Finalize art and audio, playtest for bugs, and ensure submission readiness by December 1.
+1. **Week 1**: Concept Finalization & Level Editor Setup  
+   Define core mechanics, market influence rules, and sound direction. Begin the level editor framework.
+
+2. **Week 2**: Basic Mechanics and Prototype Development  
+   Implement market mechanics, first draft of the editor, and job selection framework.
+
+3. **Week 3**: Level Creation & Polish  
+   Build initial levels, set up randomized market items, and refine game balance.
+
+4. **Week 4**: Final Polish & Submission  
+   Finish art, sound, and final playtesting for December 1 submission.
 
 ---
 
 ## Questions for the Team
 
-1. **Title:** Any title ideas to capture the theme of secrets and covert missions?
-2. **Objectives:** Should we focus on one objective per level, or allow complex, multi-objective missions?
-3. **Timer Mechanics:** Should we make time limits core to the game or only in select levels?
-4. **Setting Consistency:** Should the levels remain within a cohesive setting or vary by mission?
-5. **Engine Selection:** Are we leaning towards Unity or Godot for ease of use with the level editor?
+1. **Market Influence**: How should actions impact item prices? Should every item correlate with specific price effects?
+2. **Punch Card System**: Should we have varied rewards (e.g., power-ups, discounts) or keep it simple?
+3. **Auction Strategy**: Should killing rivals at auctions trigger “wanted” effects?
+4. **Setting Expansion**: Are there additional environments (like VIP markets or secret shops) that could enrich gameplay?
+
+---
+
+This updated GDD incorporates new themes, game mechanics, and story elements, aligning with the chaotic market setting and strategic decision-making core of *Bargain Hunters*. Let us know if more details or tweaks are needed!
