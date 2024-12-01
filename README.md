@@ -27,8 +27,22 @@ Players dive into the high-stakes, high-chaos life of a one-man war against crim
 
 ---
 
+## **How to Play**
+
+To run the game:
+1. **Download the release** from **[this link](https://placeholder-link-to-release.com)**.
+2. Launch `GameOffEditor.exe`.
+3. Click "Load" and select the level you wish to play (levels are located in the "levels" directory).
+4. Click "Test" to start playing.
+
+*Note: The game is still in pre-alpha, and the final client is not yet ready. Stay tuned for updates!*
+
+---
+
 ### **Platform**  
-- PC  
+- PC  (Windows)
+- Mac (Whisky)
+- Linux (Wine)
 
 ---
 
