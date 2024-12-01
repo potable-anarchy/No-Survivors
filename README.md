@@ -29,7 +29,6 @@ Players dive into the high-stakes, high-chaos life of a one-man war against crim
 
 ### **Platform**  
 - PC  
-- Web browsers (*itch.io*).
 
 ---
 
