@@ -1,6 +1,10 @@
 # **No Survivors**  
 **DESIGN DOCUMENT**  
-*By the Team for GameOff 2024*
+*Created By:*
+Ryan Elwood
+Brad Dougherty
+James Lamping
+Michael
 
 ---
 
