@@ -1,10 +1,10 @@
 # **No Survivors**  
 **DESIGN DOCUMENT**  
 *Created By:*
-Ryan Elwood
-Brad Dougherty
-James Lamping
-Michael
+- Ryan Elwood
+- Brad Dougherty
+- James Lamping
+- Michael
 
 ---
 
