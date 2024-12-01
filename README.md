@@ -4,7 +4,7 @@
 - Ryan Elwood
 - Brad Dougherty
 - James Lamping
-- Michael
+- Michael Yon-Stark
 
 ---
 
