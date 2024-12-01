@@ -78,7 +78,7 @@ Resourcefulness is central to the game’s design. Players must scavenge weapons
 ## **Primary Mechanics**
 
 ### **Core Mechanics**
-1. **Job Selection**  
+1. **TBD: Job Selection**  
    Players choose contracts from in-game emails. Objectives include assassination, destruction, and scavenging missions, often tied to time limits and collateral damage bonuses.
 
 2. **Scavenging Mechanics**  
@@ -138,6 +138,9 @@ Crash through the front doors of this seedy hotel and face off against the desk 
 
 3. **Maze**
 Enter the claustrophobic corridors of a sprawling indoor labyrinth, where every room feels like a trap. Enemies lurk around corners, waiting to ambush, while hidden keys and valuable loot tempt you deeper into the maze. Blast through walls to reveal shortcuts or uncover deadly surprises. With no clear path and danger in every direction, “Maze” challenges you to outwit your opponents, navigate the twisting halls, and fight your way to freedom. Will you conquer the chaos or become another victim of the maze?
+
+4. **Diner**
+You are exhausted, bloodied and sore from the days "activities" it is time to get a hot meal and maybe a damn fine piece of pie before you head back to the hotel to crash,  Too bad you were tailed to the Diner and the rest of the crew you took out is here in force, and you haven't even gotten your pie yet.  Will you try and take them all out or try to find another way out?
 
 ---
 
