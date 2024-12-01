@@ -118,7 +118,10 @@ A former special forces operative turned drifter, "The Saint" survives by using 
 
 ### **Levels**  
 1. **Alley**  
-   - *Synopsis*: Trapped in a gritty urban corner, you face a barricade swarming with agents ready to take you down. Will you charge headfirst into the chaos, sneak through the shadowy alleyways to pick off stragglers, or blow through walls to uncover hidden secrets and flank your enemies? With dynamic routes, destructible environments, and endless tactical possibilities, “Alley” challenges you to think fast, adapt, and dominate. How will you survive?
+Trapped in a gritty urban corner, you face a barricade swarming with agents ready to take you down. Will you charge headfirst into the chaos, sneak through the shadowy alleyways to pick off stragglers, or blow through walls to uncover hidden secrets and flank your enemies? With dynamic routes, destructible environments, and endless tactical possibilities, “Alley” challenges you to think fast, adapt, and dominate. How will you survive?
+
+2. **Hotel**  
+Crash through the front doors of this seedy hotel and face off against the desk staff and their heavily-armed “management.” Clear out the lobby of loitering goons before deciding your next move. Will you search the basement for a hidden key or head upstairs to uncover the shady dealings happening behind closed doors? With multiple floors of enemies and chaos, your mission is clear: leave no one standing. Take them ALL out.
 
 ---
 
