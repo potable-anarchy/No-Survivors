@@ -18,7 +18,7 @@ _No Survivors_ is a top-down action game where players take on the role of a har
 ## **Game Overview**
 
 ### **Inspiration**  
-_No Survivors_ draws inspiration from the fast-paced action of *Hotline Miami* and the strategic chaos of *Diner Dash*. The game emphasizes resourcefulness, improvisation, and gritty urban environments, setting it apart with its dynamic economy and destructible environments.
+_No Survivors_ draws inspiration from the fast-paced action of *Hotline Miami* and the strategic chaos of speed-running. The game emphasizes resourcefulness, improvisation, and gritty urban environments, setting it apart with its dynamic economy and destructible environments.
 
 ---
 
