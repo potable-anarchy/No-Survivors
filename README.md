@@ -37,10 +37,12 @@ To run the game:
 
 *Note: The game is still in pre-alpha, and the final client is not yet ready. Stay tuned for updates!*
 
+For detailed gameplay instructions, consult the **[Game Manual](Game_Manual.pdf)**.
+
 ---
 
 ### **Platform**  
-- PC  (Windows)
+- PC (Windows)
 - Mac (Whisky)
 - Linux (Wine)
 
@@ -78,7 +80,7 @@ Resourcefulness is central to the game’s design. Players must scavenge weapons
 ## **Primary Mechanics**
 
 ### **Core Mechanics**
-1. **TBD: Job Selection**  
+1. **Job Selection**  
    Players choose contracts from in-game emails. Objectives include assassination, destruction, and scavenging missions, often tied to time limits and collateral damage bonuses.
 
 2. **Scavenging Mechanics**  
@@ -109,7 +111,7 @@ Resourcefulness is central to the game’s design. Players must scavenge weapons
 - Minimalistic, expressive characters and chaotic, urban-inspired environments.  
 
 ### **Audio**  
-- **TODO: Music**: Dark, rhythmic beats complement the game’s underground vibe.  
+- **Music**: Dark, rhythmic beats complement the game’s underground vibe.  
 - **Sound Effects**: Explosions, gunfire, item pickups, and environmental destruction enhance immersion.  
 
 ---
@@ -130,17 +132,19 @@ Resourcefulness is central to the game’s design. Players must scavenge weapons
 A former special forces operative turned drifter, "The Saint" survives by using their military expertise to dismantle corruption and crime. Living off scavenged resources, they aim to make the world a little less broken, one mission at a time.
 
 ### **Levels**  
-1. **Alley**  
+
+1. **Tutorial**  
+Learn the basics of movement, aiming, and combat in this introductory level. Navigate through a simulated environment designed to prepare you for the chaos of the real missions. Practice your skills and prepare for the challenges ahead.
+
+2. **Alley**  
 Trapped in a gritty urban corner, you face a barricade swarming with agents ready to take you down. Will you charge headfirst into the chaos, sneak through the shadowy alleyways to pick off stragglers, or blow through walls to uncover hidden secrets and flank your enemies? With dynamic routes, destructible environments, and endless tactical possibilities, “Alley” challenges you to think fast, adapt, and dominate. How will you survive?
 
-2. **Hotel**  
+3. **Hotel**  
 Crash through the front doors of this seedy hotel and face off against the desk staff and their heavily-armed “management.” Clear out the lobby of loitering goons before deciding your next move. Will you search the basement for a hidden key or head upstairs to uncover the shady dealings happening behind closed doors? With multiple floors of enemies and chaos, your mission is clear: leave no one standing. Take them ALL out.
 
-3. **Maze**
+4. **Maze**  
 Enter the claustrophobic corridors of a sprawling indoor labyrinth, where every room feels like a trap. Enemies lurk around corners, waiting to ambush, while hidden keys and valuable loot tempt you deeper into the maze. Blast through walls to reveal shortcuts or uncover deadly surprises. With no clear path and danger in every direction, “Maze” challenges you to outwit your opponents, navigate the twisting halls, and fight your way to freedom. Will you conquer the chaos or become another victim of the maze?
 
-4. **Diner**
-You are exhausted, bloodied and sore from the days "activities" it is time to get a hot meal and maybe a damn fine piece of pie before you head back to the hotel to crash,  Too bad you were tailed to the Diner and the rest of the crew you took out is here in force, and you haven't even gotten your pie yet.  Will you try and take them all out or try to find another way out?
 
 ---
 
