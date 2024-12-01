@@ -1,4 +1,4 @@
-# **Urban Commando** *(Placeholder Title)*  
+# **No Survivors**  
 **DESIGN DOCUMENT**  
 *By the Team for GameOff 2024*
 
@@ -7,14 +7,14 @@
 ## **Introduction**
 
 ### **Game Summary Pitch**  
-_Urban Commando_ is a top-down action game where players take on the role of a hardened, resourceful ex-special forces operator turned drifter. Set in a dystopian urban sprawl rife with corruption, crime, and greed, the player fights through chaotic levels, scavenging for survival while taking down black-market kingpins and dismantling their operations.
+_No Survivors_ is a top-down action game where players take on the role of a hardened, resourceful ex-special forces operator turned drifter. Set in a dystopian urban sprawl rife with corruption, crime, and greed, the player fights through chaotic levels, scavenging for survival while taking down black-market kingpins and dismantling their operations.
 
 ---
 
 ## **Game Overview**
 
 ### **Inspiration**  
-_Urban Commando_ draws inspiration from the fast-paced action of *Hotline Miami* and the strategic chaos of *Diner Dash*. The game emphasizes resourcefulness, improvisation, and gritty urban environments, setting it apart with its dynamic economy and destructible environments.
+_No Survivors_ draws inspiration from the fast-paced action of *Hotline Miami* and the strategic chaos of *Diner Dash*. The game emphasizes resourcefulness, improvisation, and gritty urban environments, setting it apart with its dynamic economy and destructible environments.
 
 ---
 
@@ -114,7 +114,7 @@ A former special forces operative turned drifter, "The Saint" survives by using 
 
 ### **Levels**  
 1. **TBD**  
-   - *Objective*: TBD
+   - *Objective*: Recover stolen goods from gang-controlled apartments while causing destruction. Avoid damaging the innocent first floor.  
 
 ---
 
