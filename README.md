@@ -123,6 +123,9 @@ Trapped in a gritty urban corner, you face a barricade swarming with agents read
 2. **Hotel**  
 Crash through the front doors of this seedy hotel and face off against the desk staff and their heavily-armed “management.” Clear out the lobby of loitering goons before deciding your next move. Will you search the basement for a hidden key or head upstairs to uncover the shady dealings happening behind closed doors? With multiple floors of enemies and chaos, your mission is clear: leave no one standing. Take them ALL out.
 
+3. **Maze**
+Enter the claustrophobic corridors of a sprawling indoor labyrinth, where every room feels like a trap. Enemies lurk around corners, waiting to ambush, while hidden keys and valuable loot tempt you deeper into the maze. Blast through walls to reveal shortcuts or uncover deadly surprises. With no clear path and danger in every direction, “Maze” challenges you to outwit your opponents, navigate the twisting halls, and fight your way to freedom. Will you conquer the chaos or become another victim of the maze?
+
 ---
 
 ## **Development Timeline**
