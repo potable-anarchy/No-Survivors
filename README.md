@@ -36,7 +36,7 @@ Players dive into the high-stakes, high-chaos life of a one-man war against crim
 ### **Development Software**  
 - **Game Engine**: Clickteam Fusion (for rapid prototyping and user-friendly level editor).  
 - **Graphics**: Aseprite (for creating assets and sprite sheets).  
-- **Audio**: AI-generated beats and royalty-free tracks for sound production.  
+- **Audio**: Royalty-free tracks for sound production.  
 
 ---
 
@@ -96,7 +96,7 @@ Resourcefulness is central to the game’s design. Players must scavenge weapons
 - Minimalistic, expressive characters and chaotic, urban-inspired environments.  
 
 ### **Audio**  
-- **Music**: Dark, rhythmic beats complement the game’s underground vibe.  
+- **TODO: Music**: Dark, rhythmic beats complement the game’s underground vibe.  
 - **Sound Effects**: Explosions, gunfire, item pickups, and environmental destruction enhance immersion.  
 
 ---
