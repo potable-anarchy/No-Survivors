@@ -117,8 +117,8 @@ Resourcefulness is central to the game’s design. Players must scavenge weapons
 A former special forces operative turned drifter, "The Saint" survives by using their military expertise to dismantle corruption and crime. Living off scavenged resources, they aim to make the world a little less broken, one mission at a time.
 
 ### **Levels**  
-1. **TBD**  
-   - *Objective*: Recover stolen goods from gang-controlled apartments while causing destruction. Avoid damaging the innocent first floor.  
+1. **Alley**  
+   - *Synopsis*: Trapped in a gritty urban corner, you face a barricade swarming with agents ready to take you down. Will you charge headfirst into the chaos, sneak through the shadowy alleyways to pick off stragglers, or blow through walls to uncover hidden secrets and flank your enemies? With dynamic routes, destructible environments, and endless tactical possibilities, “Alley” challenges you to think fast, adapt, and dominate. How will you survive?
 
 ---
 
