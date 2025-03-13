@@ -30,7 +30,7 @@ Players dive into the high-stakes, high-chaos life of a one-man war against crim
 ## **How to Play**
 
 To run the game:
-1. **Download the release** from **[this link](https://github.com/bradtaco/No-Survivors/releases)**.
+1. **Download the release** from **[this link](https://github.com/potable-anarchy/No-Survivors/releases)**.
 2. Launch `GameOffEditor.exe`.
 3. Click "Load" and select the level you wish to play (levels are located in the "levels" directory).
 4. Click "Test" to start playing.
