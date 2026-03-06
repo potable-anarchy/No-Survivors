@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.vite/
+*.log
+.DS_Store
+browser/public/assets/tiles/extracted/
+browser/public/assets/tiles/tile_mapping.json
