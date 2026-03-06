@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { LevelData } from '../utils/LevelParser';
+import { LevelData, loadLevel } from '../utils/LevelParser';
 import { getTileColor } from '../utils/TileColors';
 import { getTileTexture } from '../utils/TileSprites';
 import { Player, WeaponType } from '../entities/Player';
@@ -24,7 +24,7 @@ export class GameScene extends Phaser.Scene {
   private wallGroup!: Phaser.Physics.Arcade.StaticGroup;
   private furnitureGroup!: Phaser.Physics.Arcade.StaticGroup;
   private destructibleWalls!: Phaser.Physics.Arcade.StaticGroup;
-  private itemSprites: Phaser.GameObjects.Rectangle[] = [];
+  private itemSprites: (Phaser.GameObjects.Rectangle | Phaser.GameObjects.Image)[] = [];
   private levelData!: LevelData;
   private hud!: Phaser.GameObjects.Text;
   private enemyCount = 0;
@@ -54,9 +54,8 @@ export class GameScene extends Phaser.Scene {
       'LOADING...', { fontSize: '16px', fontFamily: 'monospace', color: '#FCBF49' }
     ).setOrigin(0.5).setScrollFactor(0);
 
-    fetch(`./assets/levels/${this.levelKey}.json`)
-      .then(r => r.json())
-      .then((data: LevelData) => {
+    loadLevel(this.levelKey)
+      .then((data) => {
         loadingText.destroy();
         this.levelData = data;
         this.buildLevel();
@@ -296,7 +295,7 @@ export class GameScene extends Phaser.Scene {
         item.setData('health', 25);
       }
 
-      this.itemSprites.push(item as Phaser.GameObjects.Rectangle);
+      this.itemSprites.push(item);
     }
   }
 }
