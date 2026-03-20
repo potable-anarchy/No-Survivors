@@ -92,6 +92,9 @@ def parse_arr(filepath: Path) -> dict:
             rot = get(layer_x, y, 2)
             if rot and rot != '0':
                 obj['rotation'] = int(float(rot))
+            text = get(layer_x, y, 3).strip()
+            if text:
+                obj['text'] = text
 
             if 'Player' in tile_name:
                 # Only add if it has real coordinates

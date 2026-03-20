@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { LevelData, loadLevel } from '../utils/LevelParser';
+import { LevelData, LevelObject, loadLevel } from '../utils/LevelParser';
 import { getTileColor } from '../utils/TileColors';
 import { getTileTexture } from '../utils/TileSprites';
 import { Player, WeaponType } from '../entities/Player';
@@ -24,13 +24,25 @@ export class GameScene extends Phaser.Scene {
   private wallGroup!: Phaser.Physics.Arcade.StaticGroup;
   private furnitureGroup!: Phaser.Physics.Arcade.StaticGroup;
   private destructibleWalls!: Phaser.Physics.Arcade.StaticGroup;
+  private lockedDoors!: Phaser.Physics.Arcade.StaticGroup;
+  private dummyGroup!: Phaser.Physics.Arcade.StaticGroup;
   private itemSprites: (Phaser.GameObjects.Rectangle | Phaser.GameObjects.Image)[] = [];
+  private teleporterZones: { zone: Phaser.GameObjects.Zone; pairName: string; x: number; y: number }[] = [];
+  private messageZones: { zone: Phaser.GameObjects.Zone; text: string }[] = [];
   private levelData!: LevelData;
   private hud!: Phaser.GameObjects.Text;
+  private messageText!: Phaser.GameObjects.Text;
+  private timerText!: Phaser.GameObjects.Text;
   private enemyCount = 0;
   private totalEnemies = 0;
   private levelKey = '';
   private ready = false;
+  private keys = 0;
+  private missionTimer = 0;
+  private timerActive = false;
+  private activeMessage = '';
+  private messageFadeEvent: Phaser.Time.TimerEvent | null = null;
+  private teleportCooldown = 0;
 
   constructor() {
     super('Game');
@@ -41,14 +53,21 @@ export class GameScene extends Phaser.Scene {
     this.ready = false;
     this.enemies = [];
     this.itemSprites = [];
+    this.teleporterZones = [];
+    this.messageZones = [];
     this.enemyCount = 0;
     this.totalEnemies = 0;
+    this.keys = 0;
+    this.missionTimer = 120;
+    this.timerActive = false;
+    this.activeMessage = '';
+    this.messageFadeEvent = null;
+    this.teleportCooldown = 0;
   }
 
   create() {
     this.generateTextures();
 
-    // Show loading text while fetching level
     const loadingText = this.add.text(
       this.cameras.main.centerX, this.cameras.main.centerY,
       'LOADING...', { fontSize: '16px', fontFamily: 'monospace', color: '#FCBF49' }
@@ -98,14 +117,22 @@ export class GameScene extends Phaser.Scene {
     }
 
     this.renderItems();
+    this.renderTeleporters();
+    this.renderMessages();
 
     // Collisions
     this.physics.add.collider(this.player, this.wallGroup);
+    this.physics.add.collider(this.player, this.lockedDoors);
     this.physics.add.collider(this.player, this.furnitureGroup);
+    this.physics.add.collider(this.player, this.dummyGroup);
     this.physics.add.collider(this.enemyGroup, this.wallGroup);
+    this.physics.add.collider(this.enemyGroup, this.lockedDoors);
     this.physics.add.collider(this.enemyGroup, this.furnitureGroup);
 
     this.physics.add.collider(this.playerBullets, this.wallGroup, (bullet) => {
+      (bullet as Bullet).kill();
+    });
+    this.physics.add.collider(this.playerBullets, this.lockedDoors, (bullet) => {
       (bullet as Bullet).kill();
     });
     this.physics.add.collider(this.playerBullets, this.furnitureGroup, (bullet) => {
@@ -115,7 +142,14 @@ export class GameScene extends Phaser.Scene {
       (bullet as Bullet).kill();
       (wall as Phaser.Physics.Arcade.Sprite).destroy();
     });
+    this.physics.add.collider(this.playerBullets, this.dummyGroup, (bullet, dummy) => {
+      (bullet as Bullet).kill();
+      (dummy as Phaser.Physics.Arcade.Sprite).destroy();
+    });
     this.physics.add.collider(this.enemyBullets, this.wallGroup, (bullet) => {
+      (bullet as Bullet).kill();
+    });
+    this.physics.add.collider(this.enemyBullets, this.lockedDoors, (bullet) => {
       (bullet as Bullet).kill();
     });
     this.physics.add.collider(this.enemyBullets, this.furnitureGroup, (bullet) => {
@@ -145,14 +179,38 @@ export class GameScene extends Phaser.Scene {
     this.cameras.main.setZoom(2);
     this.cameras.main.setBackgroundColor('#003049');
 
-    // HUD
-    this.hud = this.add.text(10, 10, '', {
-      fontSize: '4px',
+    // All HUD elements are world-space text repositioned each frame
+    this.hud = this.add.text(0, 0, '', {
+      fontSize: '8px',
       fontFamily: 'monospace',
       color: '#FCBF49',
       backgroundColor: '#003049',
-      padding: { x: 2, y: 1 },
-    }).setScrollFactor(0).setDepth(100);
+      padding: { x: 3, y: 2 },
+    }).setDepth(200);
+
+    this.messageText = this.add.text(0, 0, '', {
+      fontSize: '7px',
+      fontFamily: 'monospace',
+      color: '#FCBF49',
+      backgroundColor: '#003049',
+      padding: { x: 4, y: 3 },
+      align: 'center',
+      wordWrap: { width: 200 },
+    }).setOrigin(0.5, 1).setDepth(200).setAlpha(0);
+
+    this.timerText = this.add.text(0, 0, '', {
+      fontSize: '8px',
+      fontFamily: 'monospace',
+      color: '#D62828',
+      backgroundColor: '#003049',
+      padding: { x: 3, y: 2 },
+    }).setOrigin(1, 0).setDepth(200);
+
+    // Check if level has timer tiles — activate mission timer
+    const hasTimer = this.levelData.layers.furniture.some(o => o.type === 'Tile_Timer');
+    if (hasTimer) {
+      this.timerActive = true;
+    }
 
     // Keys
     this.input.keyboard!.on('keydown-R', () => {
@@ -163,8 +221,26 @@ export class GameScene extends Phaser.Scene {
     });
   }
 
-  update() {
+  update(_time: number, delta: number) {
     if (!this.ready) return;
+
+    // Mission timer countdown
+    if (this.timerActive && this.player.alive) {
+      this.missionTimer -= delta / 1000;
+      if (this.missionTimer <= 0) {
+        this.missionTimer = 0;
+        this.player.takeDamage(999);
+      }
+      this.timerText.setText(`TIME: ${Math.ceil(this.missionTimer)}`);
+      if (this.missionTimer <= 10) {
+        this.timerText.setColor('#D62828');
+      }
+    }
+
+    // Teleport cooldown
+    if (this.teleportCooldown > 0) {
+      this.teleportCooldown -= delta;
+    }
 
     // Item pickups
     for (let i = this.itemSprites.length - 1; i >= 0; i--) {
@@ -176,20 +252,96 @@ export class GameScene extends Phaser.Scene {
         if (weaponType) {
           this.player.equipWeapon(weaponType);
         }
+        if (item.getData('isKey')) {
+          this.keys++;
+        }
+        if (item.getData('isTimeUp')) {
+          this.missionTimer += 15;
+        }
         item.destroy();
         this.itemSprites.splice(i, 1);
       }
     }
 
-    // HUD
+    // Teleporter check
+    if (this.teleportCooldown <= 0) {
+      for (const tp of this.teleporterZones) {
+        if (!tp.pairName) continue;
+        const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, tp.x, tp.y);
+        if (dist < 10) {
+          const dest = this.teleporterZones.find(
+            other => other.pairName === tp.pairName && other !== tp
+          );
+          if (dest) {
+            this.player.setPosition(dest.x, dest.y);
+            this.teleportCooldown = 500;
+          }
+          break;
+        }
+      }
+    }
+
+    // Locked door interaction (player walks into locked door while holding key)
+    this.lockedDoors.getChildren().forEach(door => {
+      if (!door.active) return;
+      const d = door as Phaser.GameObjects.GameObject & { x: number; y: number };
+      const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, d.x, d.y);
+      if (dist < 14 && this.keys > 0) {
+        this.keys--;
+        door.destroy();
+      }
+    });
+
+    // Message zone proximity
+    let nearMessage = '';
+    for (const mz of this.messageZones) {
+      if (!mz.text) continue;
+      const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, mz.zone.x, mz.zone.y);
+      if (dist < 24) {
+        nearMessage = mz.text;
+        break;
+      }
+    }
+    if (nearMessage && nearMessage !== this.activeMessage) {
+      this.activeMessage = nearMessage;
+      this.messageText.setText(nearMessage);
+      this.messageText.setAlpha(1);
+      if (this.messageFadeEvent) this.messageFadeEvent.destroy();
+      this.messageFadeEvent = this.time.delayedCall(3000, () => {
+        this.tweens.add({
+          targets: this.messageText,
+          alpha: 0,
+          duration: 500,
+          onComplete: () => { this.activeMessage = ''; }
+        });
+      });
+    }
+    // Position message text above player in world space
+    if (this.messageText.alpha > 0) {
+      this.messageText.setPosition(this.player.x, this.player.y - 24);
+    }
+
+    // Position HUD elements relative to camera viewport
+    const cam = this.cameras.main;
+    const vx = cam.scrollX;
+    const vy = cam.scrollY;
+    const vw = cam.width / cam.zoom;
+    const vh = cam.height / cam.zoom;
+
+    this.hud.setPosition(vx + 4, vy + 4);
+    this.timerText.setPosition(vx + vw - 4, vy + 4);
+
+    // HUD text
     const weaponName = this.player.weapon.replace('_', ' ').toUpperCase();
-    this.hud.setText(
-      `HP: ${this.player.health} | ${weaponName} | KILLS: ${this.enemyCount}/${this.totalEnemies} | R:restart ESC:menu`
-    );
+    let hudStr = `HP: ${this.player.health} | ${weaponName} | KILLS: ${this.enemyCount}/${this.totalEnemies}`;
+    if (this.keys > 0) hudStr += ` | KEYS: ${this.keys}`;
+    hudStr += ' | R:restart ESC:menu';
+    this.hud.setText(hudStr);
 
     if (!this.player.alive) {
       this.hud.setText('YOU DIED - Press R to restart');
-    } else if (this.enemyCount >= this.totalEnemies) {
+      this.timerText.setText('');
+    } else if (this.totalEnemies > 0 && this.enemyCount >= this.totalEnemies) {
       this.hud.setText('LEVEL CLEAR! - Press ESC for menu');
     }
   }
@@ -221,15 +373,16 @@ export class GameScene extends Phaser.Scene {
   private renderWalls() {
     this.wallGroup = this.physics.add.staticGroup();
     this.destructibleWalls = this.physics.add.staticGroup();
+    this.lockedDoors = this.physics.add.staticGroup();
 
     for (const obj of this.levelData.layers.walls) {
       const isDestructible = obj.type === 'Tile_Destructible Wall';
       const isInvisible = obj.type === 'Tile_Invisible Wall';
+      const isLocked = obj.type === 'Tile_Door Locked';
       const tex = getTileTexture(obj.type);
 
       let gameObj: Phaser.GameObjects.GameObject;
       if (isInvisible) {
-        // Invisible wall — no visual, just physics
         const rect = this.add.rectangle(obj.x, obj.y, TILE, TILE, 0x000000, 0);
         rect.setDepth(5);
         gameObj = rect;
@@ -244,7 +397,14 @@ export class GameScene extends Phaser.Scene {
         gameObj = rect;
       }
 
-      const group = isDestructible ? this.destructibleWalls : this.wallGroup;
+      let group: Phaser.Physics.Arcade.StaticGroup;
+      if (isLocked) {
+        group = this.lockedDoors;
+      } else if (isDestructible) {
+        group = this.destructibleWalls;
+      } else {
+        group = this.wallGroup;
+      }
       group.add(gameObj);
       const body = gameObj.body as Phaser.Physics.Arcade.StaticBody;
       body.setSize(TILE, TILE);
@@ -254,8 +414,12 @@ export class GameScene extends Phaser.Scene {
 
   private renderFurniture() {
     this.furnitureGroup = this.physics.add.staticGroup();
+    this.dummyGroup = this.physics.add.staticGroup();
 
     for (const obj of this.levelData.layers.furniture) {
+      if (obj.type === 'Tile_Timer') continue;
+
+      const isDummy = obj.type === 'Tile_Dummy';
       const tex = getTileTexture(obj.type);
       let gameObj: Phaser.GameObjects.GameObject;
       if (tex) {
@@ -269,7 +433,8 @@ export class GameScene extends Phaser.Scene {
         gameObj = rect;
       }
 
-      this.furnitureGroup.add(gameObj);
+      const group = isDummy ? this.dummyGroup : this.furnitureGroup;
+      group.add(gameObj);
       const body = gameObj.body as Phaser.Physics.Arcade.StaticBody;
       body.setSize(TILE, TILE);
       body.setOffset(-TILE / 2, -TILE / 2);
@@ -291,11 +456,49 @@ export class GameScene extends Phaser.Scene {
       if (weaponType) {
         item.setData('weaponType', weaponType);
       }
+      if (obj.type === 'Tile_Item_Key') {
+        item.setData('isKey', true);
+      }
       if (obj.type === 'Tile_Item_TimeUp') {
-        item.setData('health', 25);
+        item.setData('isTimeUp', true);
       }
 
       this.itemSprites.push(item);
+    }
+  }
+
+  private renderTeleporters() {
+    for (const obj of this.levelData.layers.teleporters) {
+      const tex = getTileTexture(obj.type);
+      if (tex) {
+        this.add.image(obj.x, obj.y, tex).setDepth(2);
+      } else {
+        this.add.rectangle(obj.x, obj.y, TILE, TILE, 0xF77F00, 0.6).setDepth(2);
+      }
+
+      const zone = this.add.zone(obj.x, obj.y, TILE, TILE);
+      this.teleporterZones.push({
+        zone,
+        pairName: obj.text || '',
+        x: obj.x,
+        y: obj.y,
+      });
+    }
+  }
+
+  private renderMessages() {
+    for (const obj of this.levelData.layers.messages) {
+      if (!obj.text || (obj.x === 0 && obj.y === 0)) continue;
+
+      const tex = getTileTexture('Tile_Sign');
+      if (tex) {
+        this.add.image(obj.x, obj.y, tex).setDepth(2).setAlpha(0.7);
+      } else {
+        this.add.rectangle(obj.x, obj.y, TILE, TILE, 0xFCBF49, 0.3).setDepth(2);
+      }
+
+      const zone = this.add.zone(obj.x, obj.y, TILE * 2, TILE * 2);
+      this.messageZones.push({ zone, text: obj.text });
     }
   }
 }

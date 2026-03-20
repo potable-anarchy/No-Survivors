@@ -76,6 +76,8 @@ const TILE_TEXTURE_MAP: Record<string, string> = {
   'Tile_Hydrant': 'tile_hydrant',
   'Tile_Sign': 'tile_sign',
   'Tile_Dummy': 'tile_dummy',
+  'Tile_Teleporter': 'tile_teleporter',
+  'Tile_Timer': 'tile_timer',
 };
 
 export function getTileTexture(type: string): string | null {

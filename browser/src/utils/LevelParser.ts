@@ -3,6 +3,7 @@ export interface LevelObject {
   y: number;
   type: string;
   rotation?: number;
+  text?: string;
 }
 
 export interface LevelData {
@@ -21,6 +22,8 @@ export interface LevelData {
     furniture: LevelObject[];
     player: LevelObject[];
     enemies: LevelObject[];
+    messages: LevelObject[];
+    teleporters: LevelObject[];
   };
 }
 

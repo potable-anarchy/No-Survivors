@@ -100,6 +100,8 @@ export class BootScene extends Phaser.Scene {
     this.load.image('tile_hydrant', './assets/tiles/hydrant.png');
     this.load.image('tile_sign', './assets/tiles/sign.png');
     this.load.image('tile_dummy', './assets/tiles/dummy.png');
+    this.load.image('tile_teleporter', './assets/tiles/teleporter.png');
+    this.load.image('tile_timer', './assets/tiles/timer.png');
   }
 
   create() {
